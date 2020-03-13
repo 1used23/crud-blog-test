@@ -1,0 +1,9 @@
+.new-card {
+  &__form {
+    display: flex !important;
+    margin: 0 auto !important;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 25%;
+  }
+}
