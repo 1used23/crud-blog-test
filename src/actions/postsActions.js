@@ -8,6 +8,12 @@ import {
   CLOSE_POST
 } from "../constants/constants";
 
+export const closePost = () => dispatch => {
+  dispatch({
+    type: CLOSE_POST
+  });
+};
+
 export const getAllPosts = () => dispatch => {
   const requestOptions = {
     method: "GET",

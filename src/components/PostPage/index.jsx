@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { closePost } from "../../actions/postsActions";
 import { Link, useParams } from "react-router-dom";
 import { Card } from "../../components";
 import {
@@ -12,7 +14,7 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 import "./PostPage.scss";
 
-const PostPage = () => {
+const PostPage = ({ closePost }) => {
   const { id } = useParams();
   const [singlePost, setSinglePost] = useState();
   const [commentValue, setCommentValue] = useState();
@@ -66,7 +68,11 @@ const PostPage = () => {
         <>
           <div className="post-page__comeback">
             <Link to="/">
-              <IconButton>
+              <IconButton
+                onClick={() => {
+                  closePost();
+                }}
+              >
                 <ArrowBackIcon className="" />
               </IconButton>
             </Link>
@@ -108,4 +114,8 @@ const PostPage = () => {
   );
 };
 
-export default PostPage;
+const mapDispatchToProps = dispatch => ({
+  closePost: () => dispatch(closePost())
+});
+
+export default connect(null, mapDispatchToProps)(PostPage);

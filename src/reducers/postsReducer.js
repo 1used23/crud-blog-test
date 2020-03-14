@@ -1,9 +1,10 @@
 import {
-  ADD_NEW_POST_SUCCESSFUL,
   ADD_NEW_POST_REQUEST,
+  ADD_NEW_POST_SUCCESSFUL,
   ADD_NEW_POST_FAILED,
   GET_ALL_POST_SUCCESSFUL,
-  REMOVE_POST
+  REMOVE_POST,
+  CLOSE_POST
 } from "../constants/constants";
 
 const initialState = {
@@ -39,6 +40,8 @@ export const postsReducer = (state = initialState, action) => {
         ...state,
         posts: state.posts.filter(post => post.id !== action.payload)
       };
+    case CLOSE_POST:
+      return { posts: [] };
     default:
       return state;
   }

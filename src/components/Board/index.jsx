@@ -10,7 +10,7 @@ const Board = ({ data, getAllPosts }) => {
 
   return (
     <div className="board">
-      {postData.length
+      {postData && postData.length
         ? postData.map(post => {
             if (post.title || post.body)
               return (
