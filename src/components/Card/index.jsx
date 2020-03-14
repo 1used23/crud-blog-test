@@ -1,30 +1,17 @@
-import React from "react";
 import {
-  Card as CardUI,
   Button,
-  Typography,
-  IconButton
+  Card as CardUI,
+  IconButton,
+  Typography
 } from "@material-ui/core";
 import DeleteOutline from "@material-ui/icons/DeleteOutline";
-import "./Card.scss";
+import React from "react";
 import { Link } from "react-router-dom";
+import "./Card.scss";
+import { removeCard } from "../../actions/postsActions";
+import { connect } from "react-redux";
 
-const Card = ({ post, single }) => {
-  const deleteCard = cardId => {
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    const requestOptions = {
-      method: "DELETE",
-      headers: myHeaders,
-      redirect: "follow"
-    };
-
-    fetch(`https://simpleblogapi.herokuapp.com/posts/${cardId}`, requestOptions)
-      .then(response => response.text())
-      //.then(result => console.log(result))
-      .catch(error => console.log("error", error));
-  };
+const Card = ({ post, single, removeCard }) => {
   return (
     <CardUI className="card">
       <Typography variant="h5" className="card__title">
@@ -39,9 +26,8 @@ const Card = ({ post, single }) => {
               <Button>READ MORE</Button>
             </Link>
             <IconButton
-              data-id={post.id}
-              onClick={e => {
-                deleteCard(e.currentTarget.dataset.id);
+              onClick={() => {
+                removeCard(post.id);
               }}
             >
               <DeleteOutline />
@@ -53,4 +39,8 @@ const Card = ({ post, single }) => {
   );
 };
 
-export default Card;
+const mapDispatchToProps = dispatch => ({
+  removeCard: id => dispatch(removeCard(id))
+});
+
+export default connect(null, mapDispatchToProps)(Card);

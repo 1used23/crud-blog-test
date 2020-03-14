@@ -1,37 +1,36 @@
-import React, { useEffect, useState } from "react";
-import "./Board.scss";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { getAllPosts, removeCard } from "../../actions/postsActions";
 import { Card } from "../../components";
+import "./Board.scss";
 
-const Board = () => {
-  const getData = () => {
-    const requestOptions = {
-      method: "GET",
-      redirect: "follow"
-    };
-
-    fetch("https://simpleblogapi.herokuapp.com/posts", requestOptions)
-      .then(response => response.json())
-      .then(result => setData(result))
-      .catch(error => console.log("error", error));
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const [data, setData] = useState();
+const Board = ({ data, getAllPosts }) => {
+  useEffect(getAllPosts, []);
+  const postData = data.posts;
 
   return (
     <div className="board">
-      {data && data.length
-        ? data.reverse().map(post => {
+      {postData.length
+        ? postData.map(post => {
             if (post.title || post.body)
-              return <Card post={post} key={post.id} />;
-            return 0;
+              return (
+                <div key={post.id}>
+                  <Card post={post} key={post.id} />
+                </div>
+              );
           })
         : "Постов нет"}
     </div>
   );
 };
 
-export default Board;
+const mapStateToProps = state => ({
+  data: state.posts
+});
+
+const mapDispatchToProps = dispatch => ({
+  getAllPosts: () => dispatch(getAllPosts()),
+  removeCard: id => dispatch(removeCard(id))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Board);

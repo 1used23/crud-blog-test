@@ -58,9 +58,7 @@ const PostPage = () => {
       .catch(error => console.log("error", error));
   };
 
-  useEffect(() => {
-    getSinglePost();
-  }, []);
+  useEffect(getSinglePost, []);
 
   return (
     <div className="post-page">
