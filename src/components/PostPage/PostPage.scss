@@ -4,6 +4,7 @@
   &__comments {
     &_el {
       padding: 10px;
+      margin-bottom: 10px;
     }
     &_input {
       margin-top: 10px;
@@ -15,5 +16,10 @@
   .post-page {
     flex-direction: column;
     justify-content: center;
+    &__comments {
+      &_el {
+        width: fit-content;
+      }
+    }
   }
 }

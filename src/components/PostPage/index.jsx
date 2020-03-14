@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { closePost } from "../../actions/postsActions";
+import { addNewComment, getSelectedPost } from "../../actions/commentsActions";
 import { Link, useParams } from "react-router-dom";
 import { Card } from "../../components";
 import {
@@ -14,57 +15,37 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 
 import "./PostPage.scss";
 
-const PostPage = ({ closePost }) => {
+const PostPage = ({
+  closePost,
+  addNewComment,
+  getSelectedPost,
+  selectedPost
+}) => {
   const { id } = useParams();
-  const [singlePost, setSinglePost] = useState();
   const [commentValue, setCommentValue] = useState();
-
-  const getSinglePost = () => {
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    const requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow"
-    };
-
-    fetch(
-      `https://simpleblogapi.herokuapp.com/posts/${id}?_embed=comments`,
-      requestOptions
-    )
-      .then(response => response.json())
-      .then(result => setSinglePost(result))
-      .catch(error => console.log("error", error));
-  };
 
   const newComment = () => {
     if (!commentValue) {
       return;
     }
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    const raw = JSON.stringify({ postId: +id, body: commentValue });
-
-    const requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow"
+    const commentData = {
+      postId: id,
+      id:
+        (selectedPost.comments[0] &&
+          selectedPost.comments[selectedPost.comments.length - 1].id + 1) ||
+        0,
+      body: commentValue
     };
-
-    fetch("https://simpleblogapi.herokuapp.com/comments", requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log("error", error));
+    addNewComment(commentData);
   };
 
-  useEffect(getSinglePost, []);
+  useEffect(() => {
+    getSelectedPost({ id: id });
+  }, []);
 
   return (
     <div className="post-page">
-      {singlePost && (
+      {selectedPost.comments && (
         <>
           <div className="post-page__comeback">
             <Link to="/">
@@ -77,13 +58,13 @@ const PostPage = ({ closePost }) => {
               </IconButton>
             </Link>
           </div>
-          <Card post={singlePost} />
+          <Card post={selectedPost} single />
           <div className="post-page__comments">
             <Typography className="post-page__comments_title" variant="h4">
               Comments
             </Typography>
 
-            {singlePost.comments.map(comment => {
+            {selectedPost.comments.map(comment => {
               return (
                 <Paper className="post-page__comments_el" key={comment.id}>
                   {comment.body}
@@ -115,7 +96,14 @@ const PostPage = ({ closePost }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  closePost: () => dispatch(closePost())
+  closePost: () => dispatch(closePost()),
+  addNewComment: ({ postId, id, body }) =>
+    dispatch(addNewComment({ postId, id, body })),
+  getSelectedPost: ({ id }) => dispatch(getSelectedPost({ id }))
 });
 
-export default connect(null, mapDispatchToProps)(PostPage);
+const mapStateToProps = state => ({
+  selectedPost: state.selectedPost
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostPage);

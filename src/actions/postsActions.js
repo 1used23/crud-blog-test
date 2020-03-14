@@ -49,11 +49,10 @@ export const removeCard = id => dispatch => {
         payload: id
       });
     })
-    //.then(result => console.log(result))
     .catch(error => console.log("error", error));
 };
 
-export const addNewPost = ({ title, body }) => dispatch => {
+export const addNewPost = ({ title, body, id }) => dispatch => {
   const myHeaders = new Headers();
   myHeaders.append("Content-Type", "application/json");
 
@@ -80,7 +79,8 @@ export const addNewPost = ({ title, body }) => dispatch => {
         type: ADD_NEW_POST_SUCCESSFUL,
         payload: {
           title,
-          body
+          body,
+          id
         }
       });
     })

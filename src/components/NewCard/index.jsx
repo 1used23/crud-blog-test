@@ -5,32 +5,9 @@ import { addNewPost } from "../../actions/postsActions";
 
 import "./NewCard.scss";
 
-const NewCard = ({ addNewPost }) => {
-  const [isShow, setIsShow] = useState(false);
+const NewCard = ({ addNewPost, nextId }) => {
   const [titleValue, setTitleValue] = useState("");
   const [textValue, setTextValue] = useState("");
-
-  // const newPost = () => {
-  //   const myHeaders = new Headers();
-  //   myHeaders.append("Content-Type", "application/json");
-
-  //   const raw = JSON.stringify({
-  //     title: titleValue,
-  //     body: textValue
-  //   });
-
-  //   const requestOptions = {
-  //     method: "POST",
-  //     headers: myHeaders,
-  //     body: raw,
-  //     redirect: "follow"
-  //   };
-
-  //   fetch("https://simpleblogapi.herokuapp.com/posts", requestOptions)
-  //     .then(response => response.text())
-  //     .then(result => console.log(result))
-  //     .catch(error => console.log("error", error));
-  // };
 
   const handleSetTitleValue = e => {
     const value = e.target.value;
@@ -46,41 +23,48 @@ const NewCard = ({ addNewPost }) => {
     if (titleValue && textValue) {
       const cardData = {
         title: titleValue,
-        body: textValue
+        body: textValue,
+        id: nextId
       };
       addNewPost(cardData);
     }
-    setIsShow(!isShow);
   };
 
   return (
     <div className="new-card">
       <div className="new-card__form">
+        <TextField
+          label="Title"
+          value={titleValue}
+          onChange={handleSetTitleValue}
+        />
+        <TextField
+          label="Text"
+          multiline
+          value={textValue}
+          onChange={handleSetTextValue}
+        />
+
         <Button className="new-card__button" onClick={handleClick}>
           Add New Card
         </Button>
-        {isShow && (
-          <>
-            <TextField
-              label="Title"
-              value={titleValue}
-              onChange={handleSetTitleValue}
-            />
-            <TextField
-              label="Text"
-              multiline
-              value={textValue}
-              onChange={handleSetTextValue}
-            />
-          </>
-        )}
       </div>
     </div>
   );
 };
 
 const mapDispatchToProps = dispatch => ({
-  addNewPost: ({ title, body }) => dispatch(addNewPost({ title, body }))
+  addNewPost: ({ title, body, id }) => dispatch(addNewPost({ title, body, id }))
 });
 
-export default connect(null, mapDispatchToProps)(NewCard);
+const mapStateToProps = state => {
+  if (state.posts.length) {
+    return {
+      nextId: state.posts.posts[0].id + 1
+    };
+  } else {
+    return {};
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewCard);

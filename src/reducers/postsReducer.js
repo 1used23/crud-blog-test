@@ -18,11 +18,9 @@ export const postsReducer = (state = initialState, action) => {
     case ADD_NEW_POST_REQUEST:
       return { ...state, isLoading: true, isError: false };
     case ADD_NEW_POST_SUCCESSFUL:
-      console.log(state);
       return {
         ...state,
         posts: [action.payload].concat(state.posts),
-        // posts: state.posts.concat([action.payload]),
         isLoading: false,
         isError: false
       };
