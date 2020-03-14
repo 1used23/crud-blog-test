@@ -14,7 +14,6 @@ export const commentsReducer = (state = initialState, action) => {
         ...action.payload
       };
     case ADD_NEW_COMMENT_SUCCESSFUL:
-      console.log(state);
       return { ...state, comments: [...state.comments, action.payload] };
     default:
       return state;

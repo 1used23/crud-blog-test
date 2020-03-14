@@ -4,7 +4,6 @@ import {
   ADD_NEW_POST_FAILED,
   GET_ALL_POST_SUCCESSFUL,
   REMOVE_POST,
-  OPEN_POST,
   CLOSE_POST
 } from "../constants/constants";
 

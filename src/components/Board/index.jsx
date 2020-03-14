@@ -18,6 +18,7 @@ const Board = ({ data, getAllPosts }) => {
                   <Card post={post} key={post.id} />
                 </div>
               );
+            return 0;
           })
         : "Постов нет"}
     </div>

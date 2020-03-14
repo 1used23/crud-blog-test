@@ -6,8 +6,6 @@ import { addNewPost } from "../../actions/postsActions";
 import "./NewCard.scss";
 
 const NewCard = ({ addNewPost, nextId }) => {
-  console.log(nextId);
-
   const [titleValue, setTitleValue] = useState("");
   const [textValue, setTextValue] = useState("");
 

@@ -39,9 +39,7 @@ const PostPage = ({
     addNewComment(commentData);
   };
 
-  useEffect(() => {
-    getSelectedPost({ id: id });
-  }, []);
+  useEffect(() => getSelectedPost({ id: id }), [id, getSelectedPost]);
 
   return (
     <div className="post-page">
