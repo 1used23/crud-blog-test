@@ -6,6 +6,8 @@ import { addNewPost } from "../../actions/postsActions";
 import "./NewCard.scss";
 
 const NewCard = ({ addNewPost, nextId }) => {
+  console.log(nextId);
+
   const [titleValue, setTitleValue] = useState("");
   const [textValue, setTextValue] = useState("");
 
@@ -58,7 +60,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => {
-  if (state.posts.length) {
+  if (state.posts.posts.length) {
     return {
       nextId: state.posts.posts[0].id + 1
     };
