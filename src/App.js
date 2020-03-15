@@ -1,13 +1,13 @@
 import React from "react";
 import "./App.scss";
-import { NewCard, Board, PostPage } from "./components";
+import { NewPost, Board, PostPage } from "./components";
 import { Route } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
       <Route exact path="/">
-        <NewCard />
+        <NewPost />
         <Board />
       </Route>
 

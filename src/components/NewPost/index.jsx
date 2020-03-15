@@ -3,7 +3,7 @@ import { Button, TextField } from "@material-ui/core";
 import { connect } from "react-redux";
 import { addNewPost } from "../../actions/postsActions";
 
-import "./NewCard.scss";
+import "./NewPost.scss";
 
 const NewCard = ({ addNewPost, nextId }) => {
   const [titleValue, setTitleValue] = useState("");
