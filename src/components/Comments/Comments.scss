@@ -1,7 +1,9 @@
 .comments {
+  margin-left: 20px;
   &__el {
     padding: 10px;
     margin-bottom: 10px;
+    max-width: 450px;
   }
   &__input {
     margin-top: 10px;

@@ -27,6 +27,8 @@ const NewCard = ({ addNewPost, nextId }) => {
         id: nextId
       };
       addNewPost(cardData);
+      setTextValue("");
+      setTitleValue("");
     }
   };
 
