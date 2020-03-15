@@ -1,0 +1,17 @@
+.comments {
+  &__el {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  &__input {
+    margin-top: 10px;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  .comments {
+    &__el {
+      width: fit-content;
+    }
+  }
+}
