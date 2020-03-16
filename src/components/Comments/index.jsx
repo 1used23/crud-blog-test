@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { addNewComment } from "../../actions/commentsActions";
+import { addNewComment } from "../../actions/postPageActions";
 import { Typography, TextField, Paper, Button } from "@material-ui/core";
 
 import "./Comments.scss";

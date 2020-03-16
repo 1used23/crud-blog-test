@@ -7,7 +7,7 @@ const initialState = {
   selectedPost: []
 };
 
-export const commentsReducer = (state = initialState, action) => {
+export const postPageReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_SELECTED_POST_SUCCESSSUL:
       return {

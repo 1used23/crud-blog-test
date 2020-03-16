@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import { postsReducer } from "./postsReducer";
-import { commentsReducer } from "./commentsReducer";
+import { postPageReducer } from "./postPageReducer";
 
 const rootReducer = combineReducers({
   posts: postsReducer,
-  selectedPost: commentsReducer
+  selectedPost: postPageReducer
 });
 
 export default rootReducer;

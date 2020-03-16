@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { closePost } from "../../actions/postsActions";
-import { getSelectedPost } from "../../actions/commentsActions";
+import { getSelectedPost } from "../../actions/postPageActions";
 import { Link, useParams } from "react-router-dom";
 import { Card, Comments } from "../../components";
 import { IconButton } from "@material-ui/core";
