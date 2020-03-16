@@ -1,6 +1,7 @@
 import {
   ADD_NEW_COMMENT_SUCCESSFUL,
-  GET_SELECTED_POST_SUCCESSSUL
+  GET_SELECTED_POST_SUCCESSSUL,
+  CLOSE_POST
 } from "../constants/constants";
 
 const initialState = {
@@ -15,6 +16,8 @@ export const postPageReducer = (state = initialState, action) => {
       };
     case ADD_NEW_COMMENT_SUCCESSFUL:
       return { ...state, comments: [...state.comments, action.payload] };
+    case CLOSE_POST:
+      return { selectedPost: [] };
     default:
       return state;
   }

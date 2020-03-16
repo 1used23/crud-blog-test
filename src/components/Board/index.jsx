@@ -5,7 +5,11 @@ import { Card } from "../../components";
 import "./Board.scss";
 
 const Board = ({ data, getAllPosts }) => {
-  useEffect(getAllPosts, []);
+  const onBoardLoaded = () => {
+    !data.posts.length && getAllPosts();
+  };
+
+  useEffect(onBoardLoaded, [data.posts.length, getAllPosts]);
   const postData = data.posts;
 
   return (

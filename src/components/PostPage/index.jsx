@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { closePost } from "../../actions/postsActions";
+import { closePost } from "../../actions/postPageActions";
 import { getSelectedPost } from "../../actions/postPageActions";
 import { Link, useParams } from "react-router-dom";
 import { Card, Comments } from "../../components";

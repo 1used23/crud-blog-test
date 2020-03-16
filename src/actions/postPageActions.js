@@ -1,7 +1,14 @@
 import {
   ADD_NEW_COMMENT_SUCCESSFUL,
-  GET_SELECTED_POST_SUCCESSSUL
+  GET_SELECTED_POST_SUCCESSSUL,
+  CLOSE_POST
 } from "../constants/constants";
+
+export const closePost = () => dispatch => {
+  dispatch({
+    type: CLOSE_POST
+  });
+};
 
 export const getSelectedPost = ({ id }) => dispatch => {
   const myHeaders = new Headers();
